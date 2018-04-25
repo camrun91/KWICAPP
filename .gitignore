@@ -10,3 +10,5 @@ hs_err_pid*
 /KWIC3/WebApplication/nbproject/private/
 /KWIC3/WebApplication/build/
 /KWIC3/WebApplication/dist/
+/KWIC3/entappEJB/entappEJB-ejb/dist/
+/KWIC3/entappEJB/build/

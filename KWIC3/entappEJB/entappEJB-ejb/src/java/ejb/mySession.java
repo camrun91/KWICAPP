@@ -58,11 +58,13 @@ public class mySession implements mySessionRemote {
             while(myresObj.next()){
                 int id =myresObj.getInt("URL_ID");
                 String line = myresObj.getString("Line");
+                line = line.trim();
                 s =controller.processCircularShift(line);
                 lines = new ArrayList<>(Arrays.asList(s.split("\\r?\\n")));
                 lines.forEach((phrase) -> {
                     try{
                         phrase = "'"+phrase+"'";
+                        phrase = phrase.trim();
                     myStateObj2.executeUpdate("insert into se.shifted values ("+id+","+phrase+")");
                     }
                     catch(java.sql.SQLException e){
@@ -83,11 +85,14 @@ public class mySession implements mySessionRemote {
 
     @Override
     public String search(String s) {
-        String results= " ";
+        String results= "";
         String querystr = "";
         ArrayList<String> inputl;
         inputl = new ArrayList<>(Arrays.asList(s.split("\\s+")));
         querystr= inputl.get(0);
+        if(querystr.equals("best")){
+            querystr = " best";
+        }
         query = "select ID from se.SHIFTED where Line like '"+querystr+"%'";
 
         try{
